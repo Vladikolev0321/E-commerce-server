@@ -6,6 +6,7 @@ const cors = require('cors');
 
 const userRouter = require('./routes/users');
 const productRouter = require('./routes/products');
+const orderRouter = require('./routes/orders');
 
 
 const app = express();
@@ -15,6 +16,7 @@ app.use(bodyParser.urlencoded({ extended: true }))
 app.use(cors());
 app.use(userRouter);
 app.use(productRouter);
+app.use(orderRouter);
 
 app.get('/', (req, res) => {
     res.send('Hello World!')
