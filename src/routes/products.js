@@ -8,5 +8,7 @@ const checkAdmin = require('../middlewares/admin');
 router.get('/products', controllers.getProducts);
 router.get('/products/:id', controllers.getProduct);
 router.post('/product', authenticateToken, checkAdmin, controllers.createProduct);
+router.put('/product/:id', authenticateToken, checkAdmin, controllers.updateProduct);
+router.delete('/product/:id', authenticateToken, checkAdmin, controllers.deleteProduct);
 
 module.exports = router;

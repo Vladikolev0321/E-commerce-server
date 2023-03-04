@@ -26,7 +26,7 @@ const register = async (req, res) => {
 
         const token = jwt.sign({ _id: newUser._id.toString() }, process.env.JWT_SECRET)
         console.log(newUser);
-        res.status(201).json({ message: 'User registered successfully', token: token });
+        res.status(200).json({ message: 'User registered successfully', token: token });
     } catch (error) {
         console.log(error);
         res.status(500).json({ message: 'Server error' });
