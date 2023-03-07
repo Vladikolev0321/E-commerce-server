@@ -51,8 +51,43 @@ const getOrders = async (req, res) => {
     }
 };
 
+const getAllOrders = async (req, res) => {
+    try {
+        const orders = await Order.find();
+        res.status(200).json({orders});
+    } catch (error) {
+        console.log(error);
+        res.status(500).json({ message: error.message });
+    }
+};
+
+const getOrder = async (req, res) => {
+    try {
+        const currUser = await User.findById(req.user._id);
+
+        const order = await Order.findById(req.params.id);
+        if(!order) {
+            return res.status(404).json({ message: "Order not found" });
+        }
+
+        if(currUser.role === "admin") {
+            return res.status(200).json({order});
+        }
+            
+        if(order.user.toString() === currUser._id.toString()) {
+            res.status(200).json({order});
+        }
+
+        return res.status(401).json({ message: "Unauthorized" });
+    } catch (error) {
+        console.log(error);
+        res.status(500).json({ message: error.message });
+    }
+}
 
 module.exports = {
     createOrder,
-    getOrders
+    getOrders,
+    getOrder,
+    getAllOrders
 };
