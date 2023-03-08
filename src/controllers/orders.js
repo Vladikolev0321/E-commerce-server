@@ -75,7 +75,7 @@ const getOrder = async (req, res) => {
         }
             
         if(order.user.toString() === currUser._id.toString()) {
-            res.status(200).json({order});
+            return res.status(200).json({order});
         }
 
         return res.status(401).json({ message: "Unauthorized" });
